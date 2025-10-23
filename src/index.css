@@ -1,0 +1,59 @@
+body {
+  overflow: hidden;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center !important;
+  align-items: center;
+  text-align: center;
+  height: 100vh !important;
+}
+
+/* Layer blur di belakang */
+.background-blur {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px);
+  transform: scale(1.1); /* cegah tepi blur jadi transparan */
+  z-index: 0;
+}
+
+.login-container .card-login {
+  background-color: transparent !important;
+  width: 40rem;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container .card-login .card-title {
+  font-weight: bold;
+  margin-bottom: 30px !important;
+}
+
+.bg-transparant {
+  background-color: transparent !important;
+}
+
+.form-control:focus {
+  box-shadow: none !important;
+  border-color: #ccc !important; /* atau warna border default kamu */
+  outline: none !important;
+}
+
+.btn-login {
+  background-color: transparent;
+}
+
+.btn-login:hover {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.login-title {
+  margin-bottom: 16px;
+  margin-top: 4px;
+}
