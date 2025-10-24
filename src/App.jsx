@@ -8,7 +8,9 @@ function App() {
       {/* role kasir /  resepsionis / dapur */}
       <Route></Route>
       {/* role admin saya */}
-      <Route path="admin"></Route>
+      <Route path="/admin">
+        <Route index element={<h1>Admin</h1>} />
+      </Route>
     </Routes>
   );
 }

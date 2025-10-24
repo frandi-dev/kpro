@@ -1,21 +1,33 @@
-const InputFloating = (props) => {
+const InputFloating = ({
+  icon,
+  type,
+  id,
+  placeholder,
+  value,
+  onChange,
+  name,
+  label,
+  required,
+}) => {
   return (
     <div className="input-group text-light mb-4 mt-2 input-login">
       <span className="input-group-text bg-transparant border border-secondary-subtle">
-        {props.icon}
+        {icon}
       </span>
       <div className="form-floating">
         <input
-          type={props.type}
+          type={type}
           className="form-control bg-transparant text-light border border-secondary-subtle"
-          id={props.id}
-          placeholder={props.placeholder}
-          value={props.value}
-          onChange={props.onChange}
+          id={id}
+          placeholder={placeholder}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          name={name}
+          required={required}
         />
 
-        <label htmlFor={props.id} className="text-light">
-          {props.label}
+        <label htmlFor={id} className="text-light">
+          {label}
         </label>
       </div>
     </div>
