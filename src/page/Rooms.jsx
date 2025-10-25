@@ -23,7 +23,6 @@ const Rooms = () => {
       if (result.error) {
         message.error(result.message);
       } else {
-        message.success(result.message);
         setRooms(result.data);
       }
     };
