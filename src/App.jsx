@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Login from "./page/Login";
+import AdminLayout from "./component/AdminLayout";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
         <Route index element={<h1>Staff</h1>} />
       </Route>
       {/* role admin saya */}
-      <Route path="/admin">
+      <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<h1>Admin</h1>} />
       </Route>
     </Routes>
