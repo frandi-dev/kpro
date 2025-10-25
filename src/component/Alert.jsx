@@ -32,8 +32,9 @@ const Alert = ({ message, type, close }) => {
 
   return (
     <div
-      className="alert alert-primary d-flex justify-content-between position-fixed start-50 mt-4 translate-middle-x align-items-center"
+      className="alert alert-primary d-flex justify-content-between position-fixed start-50 translate-middle-x align-items-center"
       role="alert"
+      style={{ zIndex: "100000", marginTop: "80px" }}
     >
       {renderIcon()}
       <div className="text-nowrap">{message}</div>
