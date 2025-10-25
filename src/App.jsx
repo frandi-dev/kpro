@@ -6,7 +6,9 @@ function App() {
     <Routes>
       <Route path="/" element={<Login />} />
       {/* role kasir /  resepsionis / dapur */}
-      <Route></Route>
+      <Route path="/staff">
+        <Route index element={<h1>Staff</h1>} />
+      </Route>
       {/* role admin saya */}
       <Route path="/admin">
         <Route index element={<h1>Admin</h1>} />

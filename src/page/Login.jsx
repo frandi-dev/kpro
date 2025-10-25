@@ -9,7 +9,7 @@ import { useAlert } from "../context/AlertContext";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [close, message] = useAlert();
+  const message = useAlert();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -30,7 +30,14 @@ const Login = () => {
     if (res.status === 200) {
       setLoading(false);
       message.success(result.message);
-      navigate("/admin");
+
+      localStorage.setItem("token", result.token);
+      localStorage.setItem("user", JSON.stringify(result.data));
+      if (result.data.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/staff");
+      }
     } else {
       message.error(result.message);
       setLoading(false);

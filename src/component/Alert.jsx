@@ -1,10 +1,24 @@
 import { MdErrorOutline, MdInfoOutline } from "react-icons/md";
-import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import {
+  IoMdCheckmarkCircleOutline,
+  IoMdCloseCircleOutline,
+} from "react-icons/io";
+import { useEffect } from "react";
 
 const Alert = ({ message, type, close }) => {
+  useEffect(() => {
+    const time = setTimeout(() => {
+      close();
+    }, 8000);
+
+    return () => clearTimeout(time);
+  }, []);
+
   const renderIcon = () => {
     if (type === "Error") {
-      return <MdErrorOutline size={24} style={{ paddingRight: "4px" }} />;
+      return (
+        <IoMdCloseCircleOutline size={24} style={{ paddingRight: "4px" }} />
+      );
     }
 
     if (type === "Info") {
@@ -17,43 +31,13 @@ const Alert = ({ message, type, close }) => {
   };
 
   return (
-    <>
-      <div
-        aria-live="polite"
-        aria-atomic="true"
-        className="position-relative rounded-3"
-      >
-        <div
-          className="toast-container p-3 top-0 start-50 translate-middle-x"
-          // id="toastPlacement"
-        >
-          <div className="toast show border-0">
-            <div
-              className={`${
-                type === "Error" ? "text-danger" : `text-${type.toLowerCase()}`
-              }`}
-            >
-              <div
-                className={`toast-header ${
-                  type === "Error"
-                    ? "text-danger"
-                    : `text-${type.toLowerCase()}`
-                }`}
-              >
-                {renderIcon()}
-                <strong className="me-auto">{type}!</strong>
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={() => close()}
-                />
-              </div>
-              <div className="toast-body">{message}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+    <div
+      className="alert alert-primary d-flex justify-content-between position-fixed start-50 mt-4 translate-middle-x align-items-center"
+      role="alert"
+    >
+      {renderIcon()}
+      <div className="text-nowrap">{message}</div>
+    </div>
   );
 };
 

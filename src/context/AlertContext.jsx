@@ -20,26 +20,23 @@ const AlertProvider = ({ children }) => {
 
   return (
     <AlertContext.Provider
-      value={[
-        show,
-        {
-          error: (msg = "") => {
-            setType("Error");
-            setMessage(msg);
-            return show;
-          },
-          success: (msg = "") => {
-            setType("Success");
-            setMessage(msg);
-            return show;
-          },
-          info: (msg = "") => {
-            setType("Info");
-            setMessage(msg);
-            return show;
-          },
+      value={{
+        error: (msg = "") => {
+          setType("Error");
+          setMessage(msg);
+          return show;
         },
-      ]}
+        success: (msg = "") => {
+          setType("Success");
+          setMessage(msg);
+          return show;
+        },
+        info: (msg = "") => {
+          setType("Info");
+          setMessage(msg);
+          return show;
+        },
+      }}
     >
       {show && <Alert message={message} type={type} close={hanldeClose} />}
 
