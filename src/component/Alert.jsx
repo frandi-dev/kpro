@@ -32,7 +32,9 @@ const Alert = ({ message, type, close }) => {
 
   return (
     <div
-      className="alert alert-primary d-flex justify-content-between position-fixed start-50 translate-middle-x align-items-center"
+      className={`alert ${
+        type === "Error" ? "alert-danger" : `alert-${type.toLowerCase()}`
+      } d-flex justify-content-between position-fixed start-50 translate-middle-x align-items-center`}
       role="alert"
       style={{ zIndex: "100000", marginTop: "80px" }}
     >

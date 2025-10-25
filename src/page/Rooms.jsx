@@ -15,7 +15,9 @@ const Rooms = () => {
   const [rooms, setRooms] = useState();
   const { api_url } = useConfig();
   const message = useAlert();
+  const [loading, setLoading] = useState(false);
 
+  // fetch rooms
   useEffect(() => {
     const fetchRoom = async () => {
       const res = await api.get(`${api_url}/rooms`);
@@ -26,14 +28,28 @@ const Rooms = () => {
         setRooms(result.data);
       }
     };
-
     fetchRoom();
-  }, []);
+  }, [loading, setLoading]);
 
-  const handleSubmit = (e) => {
+  // handle add room
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name);
-    console.log(price);
+    setLoading(true);
+    try {
+      const res = await api.post(`${api_url}/rooms`, {
+        name: name,
+        price_per_hour: price,
+      });
+      const result = await res.json();
+      if (res.status === 201) {
+        message.success(result.message);
+        setLoading(false);
+      } else {
+        message.error(result.message);
+      }
+    } catch (error) {
+      message.error(error.message);
+    }
   };
 
   return (
@@ -54,7 +70,7 @@ const Rooms = () => {
             <button
               className="btn btn-primary"
               data-bs-toggle="modal"
-              data-bs-target="#staticBackdrop"
+              data-bs-target="#exampleModal"
             >
               <FaPlus style={{ marginBottom: "2px" }} /> New
             </button>

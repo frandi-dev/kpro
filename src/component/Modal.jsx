@@ -2,17 +2,15 @@ const Modal = ({ title, children }) => {
   return (
     <div
       className="modal fade"
-      id="staticBackdrop"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
+      id="exampleModal"
       tabIndex={-1}
-      aria-labelledby="staticBackdropLabel"
+      aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h1 className="modal-title fs-5" id="staticBackdropLabel">
+            <h1 className="modal-title fs-5" id="exampleModalLabel">
               {title}
             </h1>
             <button
@@ -25,7 +23,7 @@ const Modal = ({ title, children }) => {
           <div className="modal-body">{children}</div>
           <div className="modal-footer">
             <button type="submit" className="btn btn-primary">
-              Submit
+              Save changes
             </button>
           </div>
         </div>

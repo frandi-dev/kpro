@@ -25,11 +25,10 @@ const RoomForm = ({ name, price, setName, setPrice }) => {
           <input
             type="number"
             name="price_per_hour"
-            min={0}
             className="form-control"
             id="price_per_hour"
-            value={price}
-            onChange={setPrice}
+            value={price < 0 ? 0 : price}
+            onChange={(e) => setPrice(e.target.value)}
           />
         </div>
       </div>
