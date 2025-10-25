@@ -2,8 +2,8 @@ import { useEffect } from "react";
 
 const RoomChard = ({ name, time, customer, status }) => {
   const user = JSON.parse(localStorage.getItem("user"));
-
   const role = user.role;
+
   const renderButtonStatus = () => {
     if (status === "available") {
       return (
