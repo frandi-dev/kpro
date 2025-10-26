@@ -1,6 +1,27 @@
 import { FaRegCircleUser } from "react-icons/fa6";
+import api from "../lib/api";
+import useConfig from "../lib/config";
+import { useToest } from "../context/ToestContext";
 
 const Navbar = () => {
+  const { api_url } = useConfig();
+  const toest = useToest();
+
+  // handle logout
+  const handleLogout = async () => {
+    try {
+      await toest.message("Press 'Yes' to continue");
+      const res = await api.post(`${api_url}/users/logout`);
+      if (res.status === 200) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.main_proccess.close();
+      }
+    } catch {
+      console.log("lanjut bekerja");
+    }
+  };
+
   return (
     <nav className="navbar navbar-dark bg-dark shadow-sm px-3">
       <div className="container-fluid">
@@ -27,9 +48,9 @@ const Navbar = () => {
               <hr className="dropdown-divider" />
             </li>
             <li>
-              <a className="dropdown-item" href="#">
+              <button className="dropdown-item" onClick={handleLogout}>
                 Logout
-              </a>
+              </button>
             </li>
           </ul>
         </div>

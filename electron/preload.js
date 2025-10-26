@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 
 contextBridge.exposeInMainWorld("main_proccess", {
-  closeWindow: () => ipcRenderer.invoke("close"),
+  close: () => ipcRenderer.invoke("close"),
 });
 
 contextBridge.exposeInMainWorld("config", {
