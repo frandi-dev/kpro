@@ -1,4 +1,6 @@
+import { useEffect, useRef } from "react";
 import { CiFaceSmile } from "react-icons/ci";
+import { Link, NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -13,30 +15,58 @@ const Sidebar = () => {
       <hr style={{ margin: 0, marginBottom: "8px" }} />
       <ul className="nav nav-pills flex-column mb-auto">
         <li>
-          <a href="#" className="nav-link text-white active">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              `nav-link ${
+                isActive ? "active bg-primary text-white" : "text-white"
+              }`
+            }
+          >
             Rooms
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="#" className="nav-link text-white">
+          <NavLink
+            to="/fnb"
+            className={({ isActive }) =>
+              `nav-link ${
+                isActive ? "active bg-primary text-white" : "text-white"
+              }`
+            }
+          >
             F&B
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="#" className="nav-link text-white">
+          <NavLink
+            to="/users"
+            className={({ isActive }) =>
+              `nav-link ${
+                isActive ? "active bg-primary text-white" : "text-white"
+              }`
+            }
+          >
             Users
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="#" className="nav-link text-white">
+          <NavLink
+            to="/reports"
+            className={({ isActive }) =>
+              `nav-link ${
+                isActive ? "active bg-primary text-white" : "text-white"
+              }`
+            }
+          >
             Reports
-          </a>
+          </NavLink>
         </li>
-        <li>
+        {/* <li>
           <a href="#" className="nav-link text-white">
             Settings
           </a>
-        </li>
+        </li> */}
       </ul>
       <hr />
     </div>
