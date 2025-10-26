@@ -29,25 +29,19 @@ const Rooms = () => {
 
   return (
     <>
-      {loading ? (
-        <div className="d-flex justify-content-center mt-4">
-          <Spiner />
-        </div>
-      ) : (
-        <div className="row p-2">
-          {rooms === undefined
-            ? "Not Found!"
-            : rooms.map((room) => (
-                <RoomChard
-                  key={room.id}
-                  name={room.name}
-                  status={room.status}
-                  price={room.price_per_hour}
-                  setLoading={setLoading}
-                />
-              ))}
-        </div>
-      )}
+      <div className="row p-2">
+        {rooms === undefined
+          ? "Not Found!"
+          : rooms.map((room) => (
+              <RoomChard
+                key={room.id}
+                name={room.name}
+                status={room.status}
+                price={room.price_per_hour}
+                setLoading={setLoading}
+              />
+            ))}
+      </div>
     </>
   );
 };
