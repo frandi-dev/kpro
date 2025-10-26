@@ -1,9 +1,14 @@
 import { useToest } from "../context/ToestContext";
+import { useAlert } from "../context/AlertContext";
+import api from "../lib/api";
+import useConfig from "../lib/config";
 
-const RoomChard = ({ name, time, customer, status }) => {
+const RoomChard = ({ name, time, customer, status, setLoading }) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const role = user.role;
   const toest = useToest();
+  const alert = useAlert();
+  const { api_url } = useConfig();
 
   const renderButtonStatus = () => {
     if (status === "available") {
@@ -46,10 +51,15 @@ const RoomChard = ({ name, time, customer, status }) => {
   };
 
   const handleDelete = async () => {
+    setLoading(true);
     try {
       await toest.message("Press 'Yes' to continue");
-      console.log(name);
+      const res = await api.delete(`${api_url}/rooms/${name}`);
+      const result = await res.json();
+      alert.success(result.message);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.info(error);
     }
   };

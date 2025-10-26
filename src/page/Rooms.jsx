@@ -80,7 +80,12 @@ const Rooms = () => {
         {rooms === undefined
           ? "Not Found!"
           : rooms.map((room) => (
-              <RoomChard key={room.id} name={room.name} status={room.status} />
+              <RoomChard
+                key={room.id}
+                name={room.name}
+                status={room.status}
+                setLoading={setLoading}
+              />
             ))}
       </div>
     </>
