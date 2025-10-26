@@ -1,16 +1,16 @@
-const Modal = ({ title, children }) => {
+const Modal = ({ id = "form", title, children, action }) => {
   return (
     <div
       className="modal fade"
-      id="exampleModal"
+      id={`${id}Modal`}
       tabIndex={-1}
-      aria-labelledby="exampleModalLabel"
+      aria-labelledby={`${id}Label`}
       aria-hidden="true"
     >
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h1 className="modal-title fs-5" id="exampleModalLabel">
+            <h1 className="modal-title fs-5" id={`${id}Label`}>
               {title}
             </h1>
             <button
@@ -18,6 +18,9 @@ const Modal = ({ title, children }) => {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
+              onClick={() => {
+                action(false);
+              }}
             />
           </div>
           <div className="modal-body">{children}</div>

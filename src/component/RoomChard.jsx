@@ -2,8 +2,18 @@ import { useToest } from "../context/ToestContext";
 import { useAlert } from "../context/AlertContext";
 import api from "../lib/api";
 import useConfig from "../lib/config";
+import idr from "../lib/Idr";
 
-const RoomChard = ({ name, time, customer, status, setLoading }) => {
+const RoomChard = ({
+  name,
+  time,
+  price,
+  customer,
+  status,
+  setLoading,
+  setEditData,
+  action,
+}) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const role = user.role;
   const toest = useToest();
@@ -64,6 +74,15 @@ const RoomChard = ({ name, time, customer, status, setLoading }) => {
     }
   };
 
+  const hadleEdit = (e) => {
+    e.preventDefault();
+    setEditData({
+      name,
+      price,
+    });
+    action(true);
+  };
+
   return (
     <div className="col-2" style={{ padding: "8px" }}>
       <div className="card">
@@ -77,6 +96,9 @@ const RoomChard = ({ name, time, customer, status, setLoading }) => {
               <button
                 className="badge text-bg-primary"
                 style={{ border: "none", marginRight: 4 }}
+                data-bs-toggle="modal"
+                data-bs-target="#formModal"
+                onClick={hadleEdit}
               >
                 Edit
               </button>
@@ -91,10 +113,15 @@ const RoomChard = ({ name, time, customer, status, setLoading }) => {
           )}
 
           <h6 className="card-subtitle mb-2 text-body-secondary">
+            Price/H : {idr(price)}
+          </h6>
+          <h6 className="card-subtitle mb-2 text-body-secondary">
             Time: {time || "00:00:00"}
           </h6>
-
-          <span className="card-text">Name : {customer || "..."}</span>
+          <br />
+          <span className="card-subtitle mb-2 text-body-secondary">
+            Name : {customer || "..."}
+          </span>
           {renderButtonStatus()}
         </div>
       </div>

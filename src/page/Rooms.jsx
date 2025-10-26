@@ -16,6 +16,8 @@ const Rooms = () => {
   const { api_url } = useConfig();
   const message = useAlert();
   const [loading, setLoading] = useState(false);
+  const [editAction, setEditAction] = useState(false);
+  const [editData, setEditData] = useState({});
 
   // fetch rooms
   useEffect(() => {
@@ -31,8 +33,13 @@ const Rooms = () => {
     fetchRoom();
   }, [loading, setLoading]);
 
+  useEffect(() => {
+    setName(editData.name);
+    setPrice(editData.price);
+  }, [editData, setEditData]);
+
   // handle add room
-  const handleSubmit = async (e) => {
+  const handleSubmitCreate = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
@@ -52,13 +59,25 @@ const Rooms = () => {
     }
   };
 
+  const handleSubmitEdit = (e) => {
+    e.preventDefault();
+    // setLoading(true);
+    console.log(name);
+    console.log(price);
+  };
+
+  const handleSubmit =
+    editAction === true ? handleSubmitEdit : handleSubmitCreate;
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Modal title={"Add a new room"}>
+        <Modal
+          title={editAction ? "Edit room" : "Create room"}
+          action={setEditAction}
+        >
           <RoomForm
-            name={name}
-            price={price}
+            name={name ?? ""}
+            price={price ?? 0}
             setName={setName}
             setPrice={setPrice}
           />
@@ -70,7 +89,13 @@ const Rooms = () => {
             <button
               className="btn btn-primary"
               data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
+              data-bs-target="#formModal"
+              onClick={() => {
+                setName("");
+                setPrice(0);
+                setEditAction(false);
+                setEditData({});
+              }}
             >
               <FaPlus style={{ marginBottom: "2px" }} /> New
             </button>
@@ -84,7 +109,10 @@ const Rooms = () => {
                 key={room.id}
                 name={room.name}
                 status={room.status}
+                price={room.price_per_hour}
                 setLoading={setLoading}
+                action={setEditAction}
+                setEditData={setEditData}
               />
             ))}
       </div>

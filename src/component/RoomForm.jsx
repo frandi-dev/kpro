@@ -11,7 +11,7 @@ const RoomForm = ({ name, price, setName, setPrice }) => {
             className="form-control"
             id="name"
             name="name"
-            value={name}
+            value={name ?? ""}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
@@ -27,7 +27,8 @@ const RoomForm = ({ name, price, setName, setPrice }) => {
             name="price_per_hour"
             className="form-control"
             id="price_per_hour"
-            value={price < 0 ? 0 : price}
+            min={0}
+            value={price}
             onChange={(e) => setPrice(e.target.value)}
           />
         </div>
