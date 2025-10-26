@@ -16,6 +16,13 @@ const Login = () => {
   const { api_url } = useConfig();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/");
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -33,11 +40,7 @@ const Login = () => {
 
       localStorage.setItem("token", result.token);
       localStorage.setItem("user", JSON.stringify(result.data));
-      if (result.data.role === "admin") {
-        navigate("/admin");
-      } else {
-        navigate("/staff");
-      }
+      navigate("/");
     } else {
       message.error(result.message);
       setLoading(false);
