@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useToest } from "../context/ToestContext";
 
 const RoomChard = ({ name, time, customer, status }) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const role = user.role;
+  const toest = useToest();
 
   const renderButtonStatus = () => {
     if (status === "available") {
@@ -43,11 +44,42 @@ const RoomChard = ({ name, time, customer, status }) => {
       </button>
     );
   };
+
+  const handleDelete = async () => {
+    try {
+      await toest.message("Press 'Yes' to continue");
+      console.log(name);
+    } catch (error) {
+      console.info(error);
+    }
+  };
+
   return (
     <div className="col-2" style={{ padding: "8px" }}>
       <div className="card">
         <div className="card-body">
-          <h5 className="card-title">{name}</h5>
+          <h4 className="card-title">{name}</h4>
+          {role === "admin" && (
+            <div
+              className="action position-absolute top-0 end-0 pt-3"
+              style={{ justifyContent: "center", alignItems: "center" }}
+            >
+              <button
+                className="badge text-bg-primary"
+                style={{ border: "none", marginRight: 4 }}
+              >
+                Edit
+              </button>
+              <button
+                className="badge text-bg-danger"
+                style={{ border: "none", marginRight: 8 }}
+                onClick={handleDelete}
+              >
+                Delete
+              </button>
+            </div>
+          )}
+
           <h6 className="card-subtitle mb-2 text-body-secondary">
             Time: {time || "00:00:00"}
           </h6>
